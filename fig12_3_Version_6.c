@@ -146,10 +146,6 @@ void free_memory(){
 //BUSCAR ELEMENTO EN LA LISTA POR NOMBRE
 void search(char* nombre){
     int contador=0;
-    Nodo* h = (Nodo*)malloc(sizeof(Nodo));
-    h->registro.nombre = malloc(strlen(nombre)+1);
-    h->registro.grupo = malloc(strlen(nombre)+1);
-    h->registro.nombre = nombre;
     Nodo* i = header;
     int igualdad =0;
     int position = 1;
@@ -161,8 +157,10 @@ void search(char* nombre){
     {  
 
       for(int k=0; k<15; k++){
-          if(i->registro.nombre[k] != h->registro.nombre[k]){
+          if(i->registro.nombre[k] != nombre[k]){
                 igualdad=-1;
+                i = i->ptrNext;
+                position++;
                 break;
           }else{
                igualdad=-2;
@@ -173,10 +171,9 @@ void search(char* nombre){
            printf("El Nombre es: %s   posicion [%d]  de lista\r\n",i->registro.nombre,position);
            return;
         }
-        position+=position;
-        i = i->ptrNext;
+        
     }
-    printf("El nombre: %s  no se encuentra en la lista\r\n",h->registro.nombre);
+    printf("El nombre: %s  no se encuentra en la lista\r\n",nombre);
     printf("\r\n");   
 }
 //MENU DE ELECION
